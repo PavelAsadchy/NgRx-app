@@ -20,8 +20,4 @@ export class CustomerListComponent implements OnInit {
     });
   }
 
-  trigger() {
-    console.log(this.customers$)
-  }
-
 }
