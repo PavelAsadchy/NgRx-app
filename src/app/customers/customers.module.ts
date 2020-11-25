@@ -6,7 +6,7 @@ import { CustomerEditComponent } from './customer-edit/customer-edit.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { CustomersRoutingModule } from './customers-routing.module';
 import { StoreModule } from '@ngrx/store';
-import { reducer } from '../shared/store/customer.reducer';
+import { reducer } from '../shared/stores/customer/customer.reducer';
 
 @NgModule({
   declarations: [CustomerComponent, CustomerAddComponent, CustomerEditComponent, CustomerListComponent],

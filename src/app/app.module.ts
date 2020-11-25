@@ -8,6 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { HomeComponent } from './core/home/home.component';
 import { NavbarComponent } from './core/navbar/navbar.component';
 import { CustomersModule } from './customers/customers.module';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CustomersModule } from './customers/customers.module';
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot({}),
-    CustomersModule
+    CustomersModule,
+    StoreDevtoolsModule.instrument(),
   ],
   providers: [],
   bootstrap: [AppComponent]
