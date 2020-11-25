@@ -7,6 +7,8 @@ import { CustomerListComponent } from './customer-list/customer-list.component';
 import { CustomersRoutingModule } from './customers-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { reducer } from '../shared/stores/customer/customer.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { CustomerEffects } from '../shared/stores/customer/customer.effects';
 
 @NgModule({
   declarations: [CustomerComponent, CustomerAddComponent, CustomerEditComponent, CustomerListComponent],
@@ -14,6 +16,7 @@ import { reducer } from '../shared/stores/customer/customer.reducer';
     CommonModule,
     CustomersRoutingModule,
     StoreModule.forFeature('customers', reducer),
+    EffectsModule.forFeature([CustomerEffects]),
   ]
 })
 export class CustomersModule { }

@@ -10,6 +10,8 @@ import { NavbarComponent } from './core/navbar/navbar.component';
 import { CustomersModule } from './customers/customers.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientModule } from '@angular/common/http';
+import { EffectsModule } from '@ngrx/effects';
+
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
     StoreModule.forRoot({}),
     CustomersModule,
     StoreDevtoolsModule.instrument(),
+    EffectsModule.forRoot([]),
     HttpClientModule,
   ],
   providers: [],
