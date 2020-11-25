@@ -9,6 +9,7 @@ import { HomeComponent } from './core/home/home.component';
 import { NavbarComponent } from './core/navbar/navbar.component';
 import { CustomersModule } from './customers/customers.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     StoreModule.forRoot({}),
     CustomersModule,
     StoreDevtoolsModule.instrument(),
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
