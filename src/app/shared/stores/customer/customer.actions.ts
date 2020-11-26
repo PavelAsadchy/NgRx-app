@@ -39,7 +39,7 @@ export const LOAD_CUSTOMER_ACTION = createAction(
 
 export const LOAD_CUSTOMER_SUCCESS_ACTION = createAction(
   CustomerActionsType.LOAD_CUSTOMER_SUCCESS,
-  props<{ loadedCustomers: Customer }>()
+  props<{ loadedCustomer: Customer }>()
 );
 
 export const LOAD_CUSTOMER_FAIL_ACTION = createAction(
@@ -69,7 +69,7 @@ export const UPDATE_CUSTOMER_ACTION = createAction(
 
 export const UPDATE_CUSTOMER_SUCCESS_ACTION = createAction(
   CustomerActionsType.UPDATE_CUSTOMER_SUCCESS,
-  props<{ customer: Update<Customer> }>()
+  props<{ update: Update<Customer> }>()
 );
 
 export const UPDATE_CUSTOMER_FAIL_ACTION = createAction(

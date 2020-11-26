@@ -13,7 +13,7 @@ export class CustomerEffects {
     private customerService: CustomerService,
   ) {}
 
-  loadCustomers$ = createEffect(() =>
+  loadCustomersAll$ = createEffect(() =>
     this.actions$.pipe(
       ofType(customerActions.LOAD_CUSTOMERS_ALL_ACTION),
       mergeMap(() => {
@@ -27,4 +27,68 @@ export class CustomerEffects {
       )
     )
   );
+
+  loadCustomer$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(customerActions.LOAD_CUSTOMER_ACTION),
+      mergeMap((action: { type: string, customerId: number}) => {
+        return this.customerService.getCustomerById(action.customerId).pipe(
+          map((customer: Customer) => {
+            return customerActions.LOAD_CUSTOMER_SUCCESS_ACTION({ loadedCustomer: customer });
+          })
+        );
+      }),
+      catchError(error => of(customerActions.LOAD_CUSTOMER_FAIL_ACTION({ err: error}))
+      )
+    )
+  );
+
+  createCustomer$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(customerActions.CREATE_CUSTOMER_ACTION),
+      mergeMap((action: { type: string, newCustomer: Customer }) => {
+        return this.customerService.createCustomer(action.newCustomer).pipe(
+          map((customer: Customer) => {
+            return customerActions.CREATE_CUSTOMER_SUCCESS_ACTION({ newCustomer: customer });
+          })
+        );
+      }),
+      catchError(error => of(customerActions.LOAD_CUSTOMER_FAIL_ACTION({ err: error}))
+      )
+    )
+  );
+
+  updateCustomer$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(customerActions.UPDATE_CUSTOMER_ACTION),
+      mergeMap((action: { type: string, customer: Customer }) => {
+        return this.customerService.updateCustomer(action.customer).pipe(
+          map((updatedCustomer: Customer) => {
+            return customerActions.UPDATE_CUSTOMER_SUCCESS_ACTION({
+              update: {
+                id: updatedCustomer.id,
+                changes: updatedCustomer,
+              }
+            });
+          })
+        );
+      }),
+      catchError(error => of(customerActions.UPDATE_CUSTOMER_FAIL_ACTION({ err: error}))
+      )
+    )
+  );
+
+  deleteCustomer$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(customerActions.DELETE_CUSTOMER_ACTION),
+      mergeMap((action: { type: string, customerId: number }) => {
+        return this.customerService.deleteCustomer(action.customerId).pipe(
+          map(() => customerActions.DELETE_CUSTOMER_SUCCESS_ACTION({ customerId: action.customerId }))
+        );
+      }),
+      catchError(error => of(customerActions.DELETE_CUSTOMER_FAIL_ACTION({ err: error}))
+      )
+    )
+  );
+
 }
