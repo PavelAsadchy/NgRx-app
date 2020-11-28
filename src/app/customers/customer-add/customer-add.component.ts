@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { Customer } from 'src/app/shared/models/customer.model';
 import { AppState } from 'src/app/shared/stores/app.state';
 import { CREATE_CUSTOMER_ACTION } from 'src/app/shared/stores/customer/customer.actions';
-import { CustomerState } from 'src/app/shared/stores/customer/customer.state';
 
 @Component({
   selector: 'app-customer-add',
