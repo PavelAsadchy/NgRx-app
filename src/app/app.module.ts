@@ -11,6 +11,12 @@ import { CustomersModule } from './customers/customers.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
+import {
+  StoreRouterConnectingModule,
+  routerReducer,
+  RouterStateSerializer
+} from '@ngrx/router-store';
+import { CustomSerializer } from './shared/utils/utils';
 
 
 @NgModule({
@@ -22,13 +28,21 @@ import { EffectsModule } from '@ngrx/effects';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({
+      router: routerReducer
+    }),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router'
+    }),
     CustomersModule,
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([]),
     HttpClientModule,
   ],
-  providers: [],
+  providers: [{
+    provide: RouterStateSerializer,
+    useClass: CustomSerializer,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
