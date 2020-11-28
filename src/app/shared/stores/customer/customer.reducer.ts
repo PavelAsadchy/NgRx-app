@@ -24,6 +24,42 @@ const customerReducer = createReducer(
     error: err,
   })),
 
+  on(CustomerStateActions.LOAD_CUSTOMER_SUCCESS_ACTION, (state, { loadedCustomer }) => {
+    return CUSTOMER_ADAPTER.addOne(loadedCustomer, {
+      ...state,
+      selectedCustomerId: loadedCustomer.id,
+    });
+  }),
+  on(CustomerStateActions.LOAD_CUSTOMER_FAIL_ACTION, (state, { err }) => ({
+    ...state,
+    error: err,
+  })),
+
+  on(CustomerStateActions.CREATE_CUSTOMER_SUCCESS_ACTION, (state, { newCustomer }) => {
+    return CUSTOMER_ADAPTER.addOne(newCustomer, state);
+  }),
+  on(CustomerStateActions.CREATE_CUSTOMER_FAIL_ACTION, (state, { err }) => ({
+    ...state,
+    error: err,
+  })),
+
+  on(CustomerStateActions.UPDATE_CUSTOMER_SUCCESS_ACTION, (state, { update }) => {
+    return CUSTOMER_ADAPTER.updateOne(update, state);
+  }),
+  on(CustomerStateActions.UPDATE_CUSTOMER_FAIL_ACTION, (state, { err }) => ({
+    ...state,
+    error: err,
+  })),
+
+  on(CustomerStateActions.DELETE_CUSTOMER_SUCCESS_ACTION, (state, { customerId }) => {
+    return CUSTOMER_ADAPTER.removeOne(customerId, state);
+  }),
+  on(CustomerStateActions.DELETE_CUSTOMER_FAIL_ACTION, (state, { err }) => ({
+    ...state,
+    error: err,
+  })),
+
+
 );
 
 export function reducer(state: CustomerState, action: Action) {
